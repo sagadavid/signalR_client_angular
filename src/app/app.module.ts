@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ChartsModule } from 'ng2-charts';
-import { HttpClientModule } form '@angular/common/http';
+import { BaseChartDirective } from 'ng2-charts';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ChartsModule,
+    BaseChartDirective,
     HttpClientModule
   ],
   providers: [],

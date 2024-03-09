@@ -6,13 +6,12 @@ import { ChartModel } from '../interfaces/chartmodel.model';
 @Injectable({
   providedIn: 'root'
 })
+
 export class SignalRService {
-  public data: ChartModel[];
+  public data: ChartModel[]=[];
   private hubCon: signalR.HubConnection;
+
   public startCon = () => {
-    this.hubCon = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:7216/chart')
-      .build();
 
     this.hubCon
       .start()
@@ -25,5 +24,9 @@ export class SignalRService {
       console.log(data);
     });
 }
-  constructor() { }
+  constructor() {
+     this.hubCon = new signalR.HubConnectionBuilder()
+      .withUrl('https://localhost:7216/chart')
+      .build();
+  }
 }

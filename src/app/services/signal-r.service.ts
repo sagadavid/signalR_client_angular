@@ -10,10 +10,9 @@ import { ChartModel } from '../interfaces/chartmodel.model';
 export class SignalRService {
   public data: ChartModel[]=[];
   private hubCon: signalR.HubConnection;
+  public broadcastedData: ChartModel[]=[];
 
   public startCon = () => {
-
-
     this.hubCon
       .start()
       .then(() => console.log('connection started'))
@@ -31,4 +30,23 @@ export class SignalRService {
       .build();
 
   }
+
+  public braodcastData = () =>{
+
+    const data = this.data.map(m => {
+      const temp = {
+        data: m.data,
+        label: m.label
+      }
+      return temp;
+    });
+    this.hubCon.invoke('pustChartData', data).catch(error => console.log(error));
+
+  }
+
+   public broadcastData_Listener = () => {
+      this.hubCon.on('broadcastchartdata', (data) => {
+        this.broadcastedData = data;
+      })
+    }
 }

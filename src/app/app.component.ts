@@ -8,6 +8,7 @@ import { ChartType } from 'chart.js';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit{
   title = 'real time charts on angular from .net server by signalR';
 
@@ -33,12 +34,16 @@ export class AppComponent implements OnInit{
     this.signalRService.startCon();
     this.signalRService.pustChartData_Listener();
     this.startHttpRequest();
+    this.signalRService.braodcastData();
   };
 
   private startHttpRequest = () => {
       this.http.get('https://localhost:7216/api/chart')
         .subscribe(res => { console.log(res) });
   }
-
+  public chartClicked = (event: any) => {
+    console.log(event);
+    this.signalRService.braodcastData();
+}
 
 }

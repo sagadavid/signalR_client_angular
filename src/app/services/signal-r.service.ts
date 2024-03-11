@@ -13,6 +13,7 @@ export class SignalRService {
 
   public startCon = () => {
 
+
     this.hubCon
       .start()
       .then(() => console.log('connection started'))
@@ -28,5 +29,6 @@ export class SignalRService {
      this.hubCon = new signalR.HubConnectionBuilder()
       .withUrl('https://localhost:7216/chart')
       .build();
+
   }
 }
